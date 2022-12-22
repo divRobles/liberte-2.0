@@ -6,7 +6,7 @@ from api.models import db, User, Producto, Pedido, Direccion, Cesta
 from api.utils import generate_sitemap, APIException, check_user_id
 # import json, random, string, bcrypt
 import json, random, string
-# from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 
 
 api = Blueprint("api", __name__)
@@ -32,19 +32,18 @@ def recuperarPassword():
     # Almacenamos la info del user con el email recibido
     user = User.query.filter_by(email=email).first()
     # Asignamos el nuevo password generado aleatoriamente al usuario
-    
-    # if user != None:
-    #     user.password = hashed_password
-    #     db.session.commit()
+    if user != None:
+        user.password = hashed_password
+        db.session.commit()
 
-    #     mail = Mail() 
-    #     msg = Message('Recuperación de Password', sender = 'liberte', recipients = [user.email])
-    #     msg.body = "Hola " + user.nombre + " tu nuevo password es " + new_password + "."
-    #     msg.html = "<h1>Libertè</h1><h2> Hola " + user.nombre + "</h2> <p> Tu nuevo password es <b> " + new_password + "</b></p><p>Si usted no ha solicitado el cambio de contraseña ignore y elimine el mensaje por favor.</p> <p> Mensaje enviado automáticamente, no responda</p>" 
-    #     mail.send(msg)
-    #     return "Message sent!"
-    # else:
-    #     return jsonify({"msg":"El correo introducido no esta registrado"}), 400
+        mail = Mail() 
+        msg = Message('Recuperación de Password', sender = 'liberte', recipients = [user.email])
+        msg.body = "Hola " + user.nombre + " tu nuevo password es " + new_password + "."
+        msg.html = "<h1>Libertè</h1><h2> Hola " + user.nombre + "</h2> <p> Tu nuevo password es <b> " + new_password + "</b></p><p>Si usted no ha solicitado el cambio de contraseña ignore y elimine el mensaje por favor.</p> <p> Mensaje enviado automáticamente, no responda</p>" 
+        mail.send(msg)
+        return "Message sent!"
+    else:
+        return jsonify({"msg":"El correo introducido no esta registrado"}), 400
 
 # registration
 @api.route("/registration", methods=["POST"])
