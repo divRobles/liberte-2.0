@@ -17,7 +17,7 @@ from flask_jwt_extended import (JWTManager, jwt_required, create_access_token, g
 from flask_bcrypt import Bcrypt   
 # Importacion de Mail
 from flask_mail import Mail
-# 
+
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
