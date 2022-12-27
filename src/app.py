@@ -15,7 +15,7 @@ from api.commands import setup_commands
 from flask_jwt_extended import (JWTManager, jwt_required, create_access_token, get_jwt_identity)
 # import the class wrapper Bcrypt
 from flask_bcrypt import Bcrypt   
-# Importacion de Mail
+
 from flask_mail import Mail
 
 #from models import Person
